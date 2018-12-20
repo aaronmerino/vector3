@@ -8,15 +8,18 @@ class Vec3:
         self.y = y
         self.z = z
 
-    def length(self):
-        return math.sqrt(self.x * self.x
-                        + self.y * self.y
-                        + self.z * self.z)
+    def length(self) -> float:
+        return math.sqrt(self.x * self.x + self.y * self.y + self.z * self.z)
 
-    def dot(self, v: Vec3):
+    def dot(self, v: Vec3) -> float:
         return self.x * v.x + self.y * v.y + self.z * v.z
 
-    def normalize(self):
+    def cross(self, v: Vec3) -> Vec3:
+        return Vec3(self.y * v.z - self.z * v.y, 
+                    self.z * v.x - self.x * v.z,
+                    self.x * v.y - self.y * v.x)
+
+    def normalize(self) -> None:
         len = self.length()
 
         if (len > 0):
@@ -24,6 +27,15 @@ class Vec3:
             self.x = self.x * invLen
             self.y = self.y * invLen
             self.z = self.z * invLen
+
+    def add(self, v: Vec3) -> Vec3:
+        return Vec3(self.x + v.x. self.y + v.y, self.z + v.z)
+
+    def subtract(self, v: Vec3) -> Vec3:
+        return Vec3(self.x - v.x. self.y - v.y, self.z - v.z)
+
+    def scale(self, c: float) -> Vec3:
+        return Vec3(self.x * c. self.y * c, self.z * c)
     
     def __repr__(self):
         return "(" + str(self.x) + ", " + str(self.y) + ", " + str(self.z) + ")"
